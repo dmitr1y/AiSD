@@ -10,14 +10,20 @@ class HashTable
 {
 public:
 	HashTable();
-	HashTable(unsigned int );
+	HashTable(int );
 	~HashTable();
-	unsigned int HashFunction(int );
+	int HashFunction(int );
 	void ClearList(HashList *);
 	void Add(int);
 	int Get(const int);
 	void Print();
 	void PrintList(HashList *);
+	HashTable RandTable();
+	HashTable operator &(const HashTable &)const;
+	HashTable operator +(const HashTable &)const;
+	void arraySort(int* );
+	int* ListToArray(HashList*);
+	int ListSize(HashList*);
 private:
 	int size;
 	HashList **hash_array;
