@@ -1,5 +1,6 @@
 #include "HashTable.h"
 #include <iostream>
+
 using namespace std;
 
 HashTable::HashTable()
@@ -73,19 +74,38 @@ void HashTable::PrintList(HashList* list)
 
 HashTable HashTable::RandTable()
 {
-	HashTable C(size);
-	for (int i = 0; i < 50; i++)
-	{
-		C.Add(rand() % 20);
+	HashTable C(size);	
+	int *arr=new int[size];
+	for (int i = 0; i < 16; i++)
+	{	
+		int tmp;		
+		do
+		{
+			tmp = rand() % 100;
+		} while (checkRepeat(arr,size, tmp));
+		arr[i] = tmp;
+		C.Add(arr[i]);
 	}
+	//free(arr);
 	return C;
 }
 
+bool HashTable::checkRepeat(int *arr, int sizem, int number)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i]==number)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 void HashTable::ClearList(HashList *list)
 {
-	//if (list && list->next) ClearList(list->next);
-	//free(list);
+	if (list && list->next) ClearList(list->next);
+	free(list);
 }
 
 void HashTable::Add(int key)
@@ -111,19 +131,13 @@ void HashTable::Add(int key)
 	else hash_array[HashFunction(key)] = new_value;
 }
 
-
 HashTable HashTable:: operator &(const HashTable & B)const
 {
 	HashTable C(size);
 	
 	for (int i = 0; i < size; i++)
 	{		
-		/*
-		-ѕреобразовать в массив
-		-отсортировать
-		-выполн€ть & с учетом количества встретившихс€ одинаковых элементов
-		*/
-	/*	for (HashList *tmp = this->hash_array[i]; tmp ; tmp=tmp->next)
+		for (HashList *tmp = this->hash_array[i]; tmp ; tmp=tmp->next)
 		{
 			for (HashList *tmp1 = B.hash_array[i]; tmp1; tmp1 = tmp1->next)
 			{
@@ -132,7 +146,7 @@ HashTable HashTable:: operator &(const HashTable & B)const
 					C.Add(tmp->key);
 				}
 			}
-		}*/
+		}
 	}
 	return C;
 }

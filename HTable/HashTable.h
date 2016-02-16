@@ -19,6 +19,7 @@ public:
 	void Print();
 	void PrintList(HashList *);
 	HashTable RandTable();
+	bool checkRepeat(int * , int, int);
 	HashTable operator &(const HashTable &)const;
 	HashTable operator +(const HashTable &)const;
 	void arraySort(int* );
