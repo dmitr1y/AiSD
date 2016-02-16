@@ -172,10 +172,6 @@ HashTable HashTable:: operator +(const HashTable & B)const
 	return C;
 }
 
-void HashTable::arraySort(int* arr)
-{
-//USE: http://habrahabr.ru/company/infopulse/blog/133303/ 
-}
 
 int * HashTable::ListToArray(HashList *list)
 {

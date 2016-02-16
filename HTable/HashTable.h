@@ -22,7 +22,6 @@ public:
 	bool checkRepeat(int * , int, int);
 	HashTable operator &(const HashTable &)const;
 	HashTable operator +(const HashTable &)const;
-	void arraySort(int* );
 	int* ListToArray(HashList*);
 	int ListSize(HashList*);
 private:
