@@ -16,7 +16,7 @@ public:
 	void ClearList(HashList *);
 	void Add(int);
 	int Get(const int);
-	void Print();
+	void Print(char*);
 	void PrintList(const HashList *);
 	HashTable RandTable();
 	bool checkRepeat(const int * , int, int);

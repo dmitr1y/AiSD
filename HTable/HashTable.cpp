@@ -1,29 +1,37 @@
 #include "HashTable.h"
 #include <iostream>
 
+#define __TableSize  4
+#define __ScoresSize 3
+
 using namespace std;
 
 HashTable::HashTable()
 {
-	size = 15;
+	size = __TableSize;
 	hash_array = new HashList*[size];
-	for (int i = 0; i < size; i++) hash_array[i] = NULL;
+	for (int i = 0; i < size; i++) hash_array[i] = nullptr;
 }
 
 HashTable::HashTable( int Size)
 {
-	this->size = Size;
-	hash_array = new HashList*[size];
-	for (int i = 0; i < size; i++) hash_array[i] = NULL;
+	this->size = Size;	
+	this->hash_array = new HashList*[size];
+	for (int i = 0; i < size; i++) this->hash_array[i] = nullptr;
 }
 
 HashTable::~HashTable()
 {
-	/*for (int i = 0; i < size; i++)
+	if (hash_array)
 	{
-		if (hash_array[i]) ClearList(hash_array[i]);
-	}*/
-	//free(hash_array);
+		for (int i = 0; i < size; i++)
+		{
+			if (hash_array[i]) ClearList(hash_array[i]);
+		}
+		//free(hash_array);
+		
+	}
+	hash_array = nullptr;
 }
 
 int HashTable::HashFunction(int key)
@@ -42,45 +50,50 @@ int HashTable::Get(const int number)
 	return HashFunction(number);
 }
 
-void HashTable::Print()
+void HashTable::Print(char *name)
 {
-	cout << "================================" << endl;
-	cout << "+++++++++++Hash Table+++++++++++" << endl;
-	cout << "================================"<<endl;
-	for (int i = 0; i < size; i++)
+	if (hash_array)
 	{
-		cout << "|| "<< i << " => ";
-		PrintList(hash_array[i]);
+		cout << ":::::::::::::::::::::::::::::::::" << endl;
+		if (name) {
+			cout << "::::::::::: " << name << endl;
+			cout << ":::::::::::::::::::::::::::::::::" << endl;
+		}
+		for (int i = 0; i < size; i++)
+		{
+			cout << ":: " << i << " -> ";
+			PrintList(hash_array[i]);
+			cout << endl;
+		}
 		cout << endl;
 	}
-	cout << "================================" << endl;
+	else
+	{
+		cout << "ERR: EMPTY" <<endl;
+	}
 }
 
 void HashTable::PrintList(const HashList* list)
 {	
-	if (!list)
-	{
-		cout << "empty";
-		return;
-	}
 	while (list)
 	{		
 		cout << list->key << ", ";
 		list = list->next;
 	}
+	cout << "*";
 }
 
 HashTable HashTable::RandTable()
 {
 	HashTable C(size);	
-	int *arr=new int[size];
-	for (int i = 0; i < size; i++)
+	int *arr=new int[__ScoresSize];
+	for (int i = 0; i < __ScoresSize; i++)
 	{	
 		int tmp;		
 		do
 		{
 			tmp = rand() % 100;
-		} while (checkRepeat(arr,size, tmp));
+		} while (checkRepeat(arr, __ScoresSize, tmp));
 		arr[i] = tmp;
 		C.Add(arr[i]);
 	}
@@ -104,6 +117,7 @@ void HashTable::ClearList(HashList *list)
 {
 	if (list && list->next) ClearList(list->next);
 	free(list);
+	list = nullptr;
 }
 
 void HashTable::Add(int key)
@@ -170,7 +184,6 @@ HashTable HashTable:: operator +(const HashTable & B)const
 	return C;
 }
 
-
 int * HashTable::ListToArray(const HashList *list)
 {
 	int *arr = nullptr;
@@ -197,5 +210,3 @@ int HashTable::ListSize(const HashList *list)
 	}
 	return count;
 }
-
-
