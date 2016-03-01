@@ -22,8 +22,8 @@ HashTable::~HashTable()
 	/*for (int i = 0; i < size; i++)
 	{
 		if (hash_array[i]) ClearList(hash_array[i]);
-	}
-	free(hash_array);*/
+	}*/
+	//free(hash_array);
 }
 
 int HashTable::HashFunction(int key)
@@ -39,9 +39,7 @@ int HashTable::HashFunction(int key)
 
 int HashTable::Get(const int number)
 {
-	int id = HashFunction(number);
-
-	return id;
+	return HashFunction(number);
 }
 
 void HashTable::Print()
@@ -58,17 +56,17 @@ void HashTable::Print()
 	cout << "================================" << endl;
 }
 
-void HashTable::PrintList(HashList* list)
+void HashTable::PrintList(const HashList* list)
 {	
 	if (!list)
 	{
-	//	cout << "empty";
+		cout << "empty";
+		return;
 	}
-	HashList *tmp = list;
-	while (tmp)
+	while (list)
 	{		
-		cout << tmp->key << ", ";
-		tmp = tmp->next;
+		cout << list->key << ", ";
+		list = list->next;
 	}
 }
 
@@ -76,7 +74,7 @@ HashTable HashTable::RandTable()
 {
 	HashTable C(size);	
 	int *arr=new int[size];
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < size; i++)
 	{	
 		int tmp;		
 		do
@@ -86,11 +84,11 @@ HashTable HashTable::RandTable()
 		arr[i] = tmp;
 		C.Add(arr[i]);
 	}
-	//free(arr);
+	free(arr);
 	return C;
 }
 
-bool HashTable::checkRepeat(int *arr, int sizem, int number)
+bool HashTable::checkRepeat(const int *arr, int sizem, int number)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -173,31 +171,29 @@ HashTable HashTable:: operator +(const HashTable & B)const
 }
 
 
-int * HashTable::ListToArray(HashList *list)
+int * HashTable::ListToArray(const HashList *list)
 {
 	int *arr = nullptr;
 	if (list)
 	{
 		int arrSize = ListSize(list);
 		int *arr = new int[arrSize];
-		HashList *tmp = list;
 		for (int i = 0; i < arrSize; i++)
 		{
-			arr[i] = tmp->key;
-			tmp = tmp->next;
+			arr[i] = list->key;
+			list = list->next;
 		}
 	}
 	return arr;
 }
 
-int HashTable::ListSize(HashList *list)
+int HashTable::ListSize(const HashList *list)
 {
 	int count = 0;
-	HashList *tmp = list;
-	while (tmp)
+	while (list)
 	{
 		count++;
-		tmp = tmp->next;
+		list = list->next;
 	}
 	return count;
 }

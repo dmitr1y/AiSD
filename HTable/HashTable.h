@@ -17,13 +17,13 @@ public:
 	void Add(int);
 	int Get(const int);
 	void Print();
-	void PrintList(HashList *);
+	void PrintList(const HashList *);
 	HashTable RandTable();
-	bool checkRepeat(int * , int, int);
+	bool checkRepeat(const int * , int, int);
 	HashTable operator &(const HashTable &)const;
 	HashTable operator +(const HashTable &)const;
-	int* ListToArray(HashList*);
-	int ListSize(HashList*);
+	int* ListToArray(const HashList*);
+	int ListSize(const HashList*);
 private:
 	int size;
 	HashList **hash_array;
