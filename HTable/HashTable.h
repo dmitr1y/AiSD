@@ -22,7 +22,7 @@ public:
 	bool checkRepeat(const int * , int, int);
 	HashTable & operator &(const HashTable &)const;
 	HashTable & operator +(const HashTable &)const;
-	int* ListToArray(const HashList*);
+	//int* ListToArray(const HashList*);
 	int ListSize(const HashList*);
 private:
 	int size;

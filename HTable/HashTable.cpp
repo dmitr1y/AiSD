@@ -1,9 +1,9 @@
 #include "HashTable.h"
 #include <iostream>
 
-#define __TableSize  4
-#define __ScoresSize 3
-#define __RandWidth 10
+#define __TableSize  16
+#define __ScoresSize 32
+#define __RandWidth 100
 
 using namespace std;
 
@@ -29,7 +29,7 @@ HashTable::~HashTable()
 		{
 			if (this->hash_array[i]) ClearList(this->hash_array[i]);
 		}
-		//delete[]hash_array;
+		delete[]hash_array;
 	}
 	this->hash_array = nullptr;
 }
@@ -158,12 +158,12 @@ HashTable & HashTable:: operator +(const HashTable & B)const
 {
 	HashTable *C=new HashTable();
 	for (int i = 0; i < size; i++)
-	{
-		HashList *tmp= this->hash_array[i];
+	{		
+		HashList *tmp = this->hash_array[i];
 		HashList *tmp1 = B.hash_array[i];
-		while (tmp && tmp1)
+		while (tmp&&tmp1)
 		{
-			if (tmp->key != tmp1->key)
+			if (tmp->key!=tmp1->key)
 			{
 				C->Add(tmp->key);
 				C->Add(tmp1->key);
@@ -176,7 +176,6 @@ HashTable & HashTable:: operator +(const HashTable & B)const
 			C->Add(tmp->key);
 			tmp = tmp->next;
 		}
-
 		while (tmp1)
 		{
 			C->Add(tmp1->key);
@@ -186,21 +185,21 @@ HashTable & HashTable:: operator +(const HashTable & B)const
 	return *C;
 }
 
-int * HashTable::ListToArray(const HashList *list)
-{
-	int *arr = nullptr;
-	if (list)
-	{
-		int arrSize = ListSize(list);
-		int *arr = new int[arrSize];
-		for (int i = 0; i < arrSize; i++)
-		{
-			arr[i] = list->key;
-			list = list->next;
-		}
-	}
-	return arr;
-}
+//int * HashTable::ListToArray(const HashList *list)
+//{
+//	int *arr = nullptr;
+//	if (list)
+//	{
+//		int arrSize = ListSize(list);
+//		int *arr = new int[arrSize];
+//		for (int i = 0; i < arrSize; i++)
+//		{
+//			arr[i] = list->key;
+//			list = list->next;
+//		}
+//	}
+//	return arr;
+//}
 
 int HashTable::ListSize(const HashList *list)
 {
