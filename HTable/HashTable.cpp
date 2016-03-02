@@ -3,14 +3,15 @@
 
 #define __TableSize  4
 #define __ScoresSize 3
+#define __RandWidth 10
 
 using namespace std;
 
 HashTable::HashTable()
 {
-	size = __TableSize;
-	hash_array = new HashList*[size];
-	for (int i = 0; i < size; i++) hash_array[i] = nullptr;
+	this->size = __TableSize;
+	this->hash_array = new HashList*[size];
+	for (int i = 0; i < size; i++) this->hash_array[i] = nullptr;
 }
 
 HashTable::HashTable( int Size)
@@ -22,16 +23,15 @@ HashTable::HashTable( int Size)
 
 HashTable::~HashTable()
 {
-	if (hash_array)
+	if (this->hash_array)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (hash_array[i]) ClearList(hash_array[i]);
+			if (this->hash_array[i]) ClearList(this->hash_array[i]);
 		}
-		//free(hash_array);
-		
+		//delete[]hash_array;
 	}
-	hash_array = nullptr;
+	this->hash_array = nullptr;
 }
 
 int HashTable::HashFunction(int key)
@@ -42,7 +42,7 @@ int HashTable::HashFunction(int key)
 	key ^= (key >> 13);
 	key += ~(key << 9);
 	key ^= (key >> 17);
-	return key%size;
+	return key%(this->size);
 }
 
 int HashTable::Get(const int number)
@@ -52,7 +52,7 @@ int HashTable::Get(const int number)
 
 void HashTable::Print(char *name)
 {
-	if (hash_array)
+	if (this->hash_array)
 	{
 		cout << ":::::::::::::::::::::::::::::::::" << endl;
 		if (name) {
@@ -62,7 +62,7 @@ void HashTable::Print(char *name)
 		for (int i = 0; i < size; i++)
 		{
 			cout << ":: " << i << " -> ";
-			PrintList(hash_array[i]);
+			PrintList(this->hash_array[i]);
 			cout << endl;
 		}
 		cout << endl;
@@ -83,32 +83,28 @@ void HashTable::PrintList(const HashList* list)
 	cout << "*";
 }
 
-HashTable HashTable::RandTable()
+void HashTable::RandTable()
 {
-	HashTable C(size);	
 	int *arr=new int[__ScoresSize];
 	for (int i = 0; i < __ScoresSize; i++)
 	{	
 		int tmp;		
 		do
 		{
-			tmp = rand() % 100;
+			tmp = rand() % __RandWidth;
 		} while (checkRepeat(arr, __ScoresSize, tmp));
 		arr[i] = tmp;
-		C.Add(arr[i]);
+		this->Add(arr[i]);
 	}
-	free(arr);
-	return C;
+	delete[]arr;
 }
 
 bool HashTable::checkRepeat(const int *arr, int sizem, int number)
 {
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < sizem; i++)
 	{
-		if (arr[i]==number)
-		{
+		if (arr[i] == number)
 			return true;
-		}
 	}
 	return false;
 }
@@ -116,7 +112,7 @@ bool HashTable::checkRepeat(const int *arr, int sizem, int number)
 void HashTable::ClearList(HashList *list)
 {
 	if (list && list->next) ClearList(list->next);
-	free(list);
+	delete list;
 	list = nullptr;
 }
 
@@ -132,7 +128,7 @@ void HashTable::Add(int key)
 		{			
 			if (!last_value->key==key)
 			{
-				free(new_value);
+				delete new_value;
 				return;
 			}
 			if (last_value->next) last_value = last_value->next;
@@ -143,45 +139,51 @@ void HashTable::Add(int key)
 	else hash_array[HashFunction(key)] = new_value;
 }
 
-HashTable HashTable:: operator &(const HashTable & B)const
+HashTable & HashTable:: operator &(const HashTable & B)const
 {
-	HashTable C(size);
-	
+	HashTable *C= new HashTable();
 	for (int i = 0; i < size; i++)
-	{		
-		for (HashList *tmp = this->hash_array[i]; tmp ; tmp=tmp->next)
+	{
+		for (HashList *tmp = this->hash_array[i]; tmp; tmp = tmp->next)
 		{
 			for (HashList *tmp1 = B.hash_array[i]; tmp1; tmp1 = tmp1->next)
-			{
-				if (tmp1->key==tmp->key)
-				{
-					C.Add(tmp->key);
-				}
-			}
+				if (tmp1->key == tmp->key)
+					C->Add(tmp->key);
 		}
 	}
-	return C;
+	return *C;
 }
 
-HashTable HashTable:: operator +(const HashTable & B)const
+HashTable & HashTable:: operator +(const HashTable & B)const
 {
-	HashTable C(size);
+	HashTable *C=new HashTable();
 	for (int i = 0; i < size; i++)
 	{
 		HashList *tmp= this->hash_array[i];
+		HashList *tmp1 = B.hash_array[i];
+		while (tmp && tmp1)
+		{
+			if (tmp->key != tmp1->key)
+			{
+				C->Add(tmp->key);
+				C->Add(tmp1->key);
+			}
+			tmp = tmp->next;
+			tmp1 = tmp1->next;
+		}
 		while (tmp)
 		{
-			C.Add(tmp->key);
+			C->Add(tmp->key);
 			tmp = tmp->next;
 		}
-		HashList *tmp1 = B.hash_array[i];
+
 		while (tmp1)
 		{
-			C.Add(tmp1->key);
+			C->Add(tmp1->key);
 			tmp1 = tmp1->next;
 		}
 	}
-	return C;
+	return *C;
 }
 
 int * HashTable::ListToArray(const HashList *list)
