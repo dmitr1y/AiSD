@@ -1,8 +1,8 @@
 #include "HashTable.h"
 #include <iostream>
 
-#define __TableSize  16
-#define __ScoresSize 32
+#define __TableSize  32
+#define __ScoresSize 16
 #define __RandWidth 100
 
 using namespace std;
@@ -34,15 +34,14 @@ HashTable::~HashTable()
 	this->hash_array = nullptr;
 }
 
-int HashTable::HashFunction(int key)
+int HashTable::HashFunction(int h)
 {	
-	key += ~(key << 16);
-	key ^= (key >> 5);
-	key += (key << 3);
-	key ^= (key >> 13);
-	key += ~(key << 9);
-	key ^= (key >> 17);
-	return key%(this->size);
+	h ^= h >> 16;
+	h *= 0x85ebca6b;
+	h ^= h >> 13;
+	h *= 0xc2b2ae35;
+	h ^= h >> 16;
+	return h % (this->size);
 }
 
 int HashTable::Get(const int number)
@@ -184,22 +183,6 @@ HashTable & HashTable:: operator +(const HashTable & B)const
 	}
 	return *C;
 }
-
-//int * HashTable::ListToArray(const HashList *list)
-//{
-//	int *arr = nullptr;
-//	if (list)
-//	{
-//		int arrSize = ListSize(list);
-//		int *arr = new int[arrSize];
-//		for (int i = 0; i < arrSize; i++)
-//		{
-//			arr[i] = list->key;
-//			list = list->next;
-//		}
-//	}
-//	return arr;
-//}
 
 int HashTable::ListSize(const HashList *list)
 {
