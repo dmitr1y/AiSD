@@ -3,4 +3,4 @@
 #include <iostream>
 #include <set>
 
-std::set<int> makeRandSet(int );hk
+std::set<int> makeRandSet(int );
