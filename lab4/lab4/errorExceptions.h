@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
-class MyException {
+class shapeError {
 public:
 	char *message;
-	MyException() { };
-	MyException(char *msg) : message(msg) { };
-	~MyException() {};
-	void MyException::ShowExeption() {
-		std::cout << "EXCEPTION:" << message;
+	shapeError() { };
+	shapeError(char *msg) : message(msg) { };
+	~shapeError() {};
+	void shapeError::ShowExeption() {
+		std::cout << "EXCEPTION: " << message;
 	}
 };
 

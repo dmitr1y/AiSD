@@ -23,10 +23,10 @@
     <ClInclude Include="shape.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorsMy.h">
+    <ClInclude Include="Screen.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Screen.h">
+    <ClInclude Include="errorExceptions.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

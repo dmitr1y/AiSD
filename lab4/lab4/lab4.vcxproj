@@ -113,7 +113,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ErrorsMy.h" />
+    <ClInclude Include="errorExceptions.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="shape.h" />
   </ItemGroup>

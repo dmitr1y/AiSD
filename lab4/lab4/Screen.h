@@ -1,7 +1,7 @@
 #pragma once
 const int XMAX = 40; //Размер экрана
 const int YMAX = 30;
-#include "ErrorsMy.h"
+#include "errorExceptions.h"
 
 class point {	//Точка на экране
 public:
@@ -46,7 +46,7 @@ inline int on_screen(int a, int b) // проверка попадания
 
 void put_point(int a, int b)
 {
-	if (on_screen(a, b)) screen[a][b] = black; else throw MyException("Something happend with your point\n");
+	if (on_screen(a, b)) screen[a][b] = black; else throw shapeError("Something happend with your point\n");
 }
 
 void put_line(int x0, int y0, int x1, int y1)

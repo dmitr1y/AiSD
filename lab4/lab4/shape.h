@@ -164,7 +164,7 @@ parallelogramm::parallelogramm(point a, point b, point c, point d)
 		((b.y - a.y) != (c.y - d.y) || (b.x - c.x) != (a.x - d.x))// проверка на равенство высот противоположных сторон
 		)
 	{
-		throw MyException("ERROR: wrong points (its not a parallelogram)\n""sds");
+		throw shapeError("ERROR: wrong points (its not a parallelogram)\n");
 	}
 	sw = a;
 	nw = b;
@@ -304,7 +304,7 @@ void circle::draw()
 rectangle::rectangle(point a, point b)
 {
 	if (a.x == b.x && b.y == a.y) {
-		throw MyException("Error: Nevernie parametri figuri!!\n");
+		throw shapeError("Error: Nevernie parametri figuri!!\n");
 	}
 	if (a.x <= b.x) {
 		if (a.y <= b.y) {

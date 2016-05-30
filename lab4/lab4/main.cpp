@@ -3,7 +3,7 @@ using namespace std;
 #include <iostream>
 #include "screen.h"
 #include "shape.h"
-#include "ErrorsMy.h"
+#include "errorExceptions.h"
 
 class myshape : public rectangle {
 	line* mouth; // рот
@@ -38,6 +38,7 @@ void myshape::move(int a, int b)
 int main()
 {
 	setlocale(0, "rus");
+	system("color F0");
 	int a = 2;
 	try
 	{
@@ -49,7 +50,7 @@ int main()
 		shape* L_eye = new circle(point(8, 8), point(10, 10));
 		shape* R_eye = new circle(point(13, 8), point(15, 10));
 		parallelogramm* R_rog = new parallelogramm(point(0, 0), point(2, 4), point(10, 4), point(8, 0));
-		parallelogramm* L_rog = new parallelogramm(point(2, 2), point(4, 6), point(12, 6), point(10, 2));
+		parallelogramm* L_rog = new parallelogramm(point(1, 3), point(4, 6), point(12, 6), point(10, 2));
 		shape_refresh();
 		_getch();
 		hat->rotate_right();
@@ -64,14 +65,13 @@ int main()
 		L_rog->move(11, 7);
 		R_rog->move(21, 9);		
 		shape_refresh();
-		_getch();
 	}
 	catch (pointError &err) {
 		err.ShowError();
 	}
-	catch (MyException &err) {
+	catch (shapeError &err) {
 		err.ShowExeption();
 	}
-	system("pause>>END");
+	system("pause>>void");
 	return 0;
 }
