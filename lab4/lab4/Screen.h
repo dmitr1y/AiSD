@@ -1,6 +1,6 @@
 #pragma once
-const int XMAX = 80; //Размер экрана
-const int YMAX = 80;
+const int XMAX = 40; //Размер экрана
+const int YMAX = 30;
 #include "ErrorsMy.h"
 
 class point {	//Точка на экране
@@ -31,7 +31,7 @@ extern void screen_clear();	//Очистка
 char screen[XMAX][YMAX];
 
 
-enum color { black = char(254), white = ' ' };
+enum color { black = '#', white = ' ' };
 void screen_init()
 {
 	for (int y = 0; y<YMAX; y++)

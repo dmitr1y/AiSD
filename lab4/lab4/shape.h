@@ -156,140 +156,24 @@ public:
 	parallelogramm(point, point, point, point);
 };
 
-parallelogramm::parallelogramm(point a, point b,point c, point d)
+parallelogramm::parallelogramm(point a, point b, point c, point d)
 //sw=a, nw=b, ne=c, se=d
 {
-	//(y1 != y2 || y3 != y4 || x2 - x1 != x3 - x4)
-	/*if (a.y != b.y || c.y != d.y ||( b.x - a.x )!= (c.x - d.x))
+	if ((a.y != d.y && b.y != c.y || b.x != a.x && c.x != d.x) && //проверка на наличие параллельных осям прямых
+		((b.x - c.x) != (a.x - d.x) || (b.y - a.y) != (c.y - d.y)) && //проверка на рвенство длин противоположных сторон
+		((b.y - a.y) != (c.y - d.y) || (b.x - c.x) != (a.x - d.x))// проверка на равенство высот противоположных сторон
+		)
 	{
-		throw MyException("Error: Nevernie parametri figuri!!\n");
-	}*/
-	bool isHorisont = false;
-	int numX = -1, numY=-1;
-	bool isVertical = false;
-	int arrx[] = { a.x,b.x,c.x,d.x };
-	int arry[] = { a.y,b.y,c.y,d.y };
-	for (int i = 1; i < 4; i++)
-	{
-		if (arrx[0]==arrx[i])
-		{
-			isVertical = true;
-			numX = i;
-			std::cout << "for X: " << arrx[0] << "=" << arrx[i] << " in 0 and " << numX<<"\n";
-		}
-		if (arry[0]==arry[i])
-		{
-			isHorisont = true;
-			numY = i;
-			std::cout << "for Y: " << arry[0] << "=" << arry[i] << " in 0 and " << numY <<"\n";
-		}
+		throw MyException("ERROR: wrong points (its not a parallelogram)\n""sds");
 	}
-	std::cout << "horisont:" << isHorisont << "  vertical:" << isVertical << "\n";
-	int lineSize=0;
-	if (isHorisont)
-	{
-		lineSize = abs(arrx[0] - arrx[numY]);
-	}
-	if(isVertical)
-	{
-		lineSize = abs(arry[0] - arry[numX]);
-	}
-	std::cout << "lineSize: " << lineSize << "\n";
-	
-	if (!isHorisont && !isVertical)
-	{
-
-	}
-	int point3, point4;
-	
 	sw = a;
 	nw = b;
 	ne = c;
 	se = d;
-
-	/*if (a.x <=d.x) {
-		if (a.y <= b.y) {
-			sw = a;
-			ne = b;
-		}
-		else {
-			sw = point(a.x, b.y);
-			ne = point(b.x, a.y);
-		}
-	}
-	else {
-		if (a.y <= b.y) {
-			sw = point(b.x, a.y);
-			ne = point(a.x, b.y);
-		}
-		else {
-			sw = b;
-			ne = a;
-		}
-	}*/
-	/*if (a.x<d.x)
-	{
-		if (b.x<c.x)
-		{
-			if (a.y<b.y)
-			{
-				sw = a;
-				nw = b;
-				if (d.x < c.x) {
-					ne = c;
-					se = d;
-				}
-				else {
-					ne = d;
-					se=c;
-				}
-			}
-			else
-			{
-				sw = b;
-				nw = a;
-				if (d.x < c.x) {
-					ne = d;
-					se = c;
-				}
-				else {
-					ne = c;
-					se = d;
-				}
-			}
-		}
-		else
-		{
-			if (a.y<c.y)
-			{
-				sw = a;
-				nw = c;
-				if (d.x < c.x) {
-					ne = d;
-					se = c;
-				}
-				else {
-					ne = c;
-					se = d;
-				}
-			}
-			else
-			{
-				sw = c;
-				nw = a;
-			}
-		}
-	}
-	else
-	{
-
-	}*/
 }
 
 void parallelogramm::draw()
 {
-//	point nw(sw.x, ne.y);
-//	point se(ne.x, sw.y);
 	put_line(nw, ne);
 	put_line(ne, se);
 	put_line(se, sw);

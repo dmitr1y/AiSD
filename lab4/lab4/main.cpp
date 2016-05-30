@@ -37,42 +37,32 @@ void myshape::move(int a, int b)
 
 int main()
 {
+	setlocale(0, "rus");
 	int a = 2;
 	try
 	{
 		screen_init();
-		//rotatable* hat = new rectangle(point(0, 0), point(18, 6));
-		//shape* mouth = new line(point(0, 15), 17);
-		//shape* face = new myshape(point(25, 10), point(37, 18));
-		//shape* hat_circle = new circle(point(5, 6), point(13, 14));
-		//shape* L_eye = new circle(point(8, 8), point(10, 10));
-		//shape* R_eye = new circle(point(13, 8), point(15, 10));
-		//parallelogramm* R_rog = new parallelogramm(point(3, 0), point(6,5), point(3, 10), point(0, 5));
-	//	parallelogramm* L_rog = new parallelogramm(point(2, 2), point(4, 6), point(12, 6), point(10, 2));
+		rotatable* hat = new rectangle(point(0, 0), point(18, 6));
+		shape* mouth = new line(point(0, 15), 17);
+		shape* face = new myshape(point(25, 10), point(37, 18));
+		shape* hat_circle = new circle(point(5, 6), point(13, 14));
+		shape* L_eye = new circle(point(8, 8), point(10, 10));
+		shape* R_eye = new circle(point(13, 8), point(15, 10));
 		parallelogramm* R_rog = new parallelogramm(point(0, 0), point(2, 4), point(10, 4), point(8, 0));
-		parallelogramm* L_rog = new parallelogramm(point(2, 2), point(4, 6), point(12, 6), point(10, 2));/**/
+		parallelogramm* L_rog = new parallelogramm(point(2, 2), point(4, 6), point(12, 6), point(10, 2));
 		shape_refresh();
 		_getch();
-	/*	hat->rotate_right();
+		hat->rotate_right();
+		L_rog->rotate_left();
+		R_rog->rotate_right();
 		face->move(-10, -10);
 		stack(mouth, face);
 		stack(hat, mouth);
 		stack(hat_circle, mouth);
 		L_eye->move(9, -3);
-		R_eye->move(10, -3);
-		L_rog->rotate_left();
-		L_rog->move(11, 7);*/
-		R_rog->move(10, 10);
-		R_rog->rotate_right();
-		shape_refresh();
-		_getch();
-		R_rog->rotate_right();
-		shape_refresh();
-		_getch();
-		R_rog->rotate_right();
-		shape_refresh();
-		_getch();
-		R_rog->flip_horisontally();
+		R_eye->move(10, -3);		
+		L_rog->move(11, 7);
+		R_rog->move(21, 9);		
 		shape_refresh();
 		_getch();
 	}
@@ -82,6 +72,6 @@ int main()
 	catch (MyException &err) {
 		err.ShowExeption();
 	}
-	system("pause>>void");
+	system("pause>>END");
 	return 0;
 }

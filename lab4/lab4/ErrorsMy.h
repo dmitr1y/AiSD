@@ -7,7 +7,7 @@ public:
 	MyException(char *msg) : message(msg) { };
 	~MyException() {};
 	void MyException::ShowExeption() {
-		std::cout << "Возникло Исключение:" << message;
+		std::cout << "EXCEPTION:" << message;
 	}
 };
 
@@ -17,6 +17,6 @@ public:
 	pointError(int x, int y) : coordX(x), coordY(y) {
 	};
 	void pointError::ShowError() {
-		std::cout << "Oshibka koordinat" << coordX << ' ' << coordY;
+		std::cout << "ERROR COORD: " << coordX << ' ' << coordY;
 	}
 }; 
