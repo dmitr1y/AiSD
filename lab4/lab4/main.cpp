@@ -34,7 +34,6 @@ void myshape::move(int a, int b)
 	mouth->move(a, b);
 }
 
-
 int main()
 {
 	setlocale(0, "rus");

@@ -31,22 +31,25 @@ void main()
 	D = makeRandSet(size);
 	cout << "  D: ";
 	copy(D.begin(), D.end(), out);
-	//_________________________- COMPUTING -_________________________
-	cout << endl<<endl<< "################ COMPUTING ###############"<<endl<<endl;
-	cout << " computing E=A+B:" << endl << "  E: ";;
-	//_________________________- UNION -_________________________
-	set_union(A.begin(), A.end(), B.begin(), B.end(), inserter(E, E.begin()));
-	copy(E.begin(), E.end(), out);
-	cout << endl;
-	cout << " computing tmp=C&D:" << endl << "  tmp: ";;
-	set<int>tmp;//temporary set for minor calculating: tmp=C&D
-	//_________________________- INTERSECTION -_________________________
-	set_intersection(C.begin(), C.end(), D.begin(), D.end(), inserter(tmp, tmp.begin()));
-	copy(tmp.begin(), tmp.end(), out);
-	cout << endl;
-	cout << " computing E=A+B+C&D:" << endl << "  E: ";;
-	//_________________________- UNION -_________________________
-	set_union(E.begin(), E.end(), tmp.begin(), tmp.end(), inserter(E, E.begin()));
+	////_________________________- COMPUTING -_________________________
+	//cout << endl<<endl<< "################ COMPUTING ###############"<<endl<<endl;
+	//cout << " computing E=A+B:" << endl << "  E: ";;
+	////_________________________- UNION -_________________________
+	//set_union(A.begin(), A.end(), B.begin(), B.end(), inserter(E, E.begin()));
+	//copy(E.begin(), E.end(), out);
+	//cout << endl;
+	//cout << " computing tmp=C&D:" << endl << "  tmp: ";;
+	//set<int>tmp;//temporary set for minor calculating: tmp=C&D
+	////_________________________- INTERSECTION -_________________________
+	//set_intersection(C.begin(), C.end(), D.begin(), D.end(), inserter(tmp, tmp.begin()));
+	//copy(tmp.begin(), tmp.end(), out);
+	//cout << endl;
+	//cout << " computing E=A+B+C&D:" << endl << "  E: ";;
+	////_________________________- UNION -_________________________
+	//set_union(E.begin(), E.end(), tmp.begin(), tmp.end(), inserter(E, E.begin()));
+	//copy(E.begin(), E.end(), out);
+	//E = SUBST(A, B, 3);
+	E=CONCAT(A, B);
 	copy(E.begin(), E.end(), out);
 	system("pause>>void");
 }
