@@ -50,7 +50,7 @@ int main()
 		shape* L_eye = new circle(point(8, 8), point(10, 10));
 		shape* R_eye = new circle(point(13, 8), point(15, 10));
 		parallelogramm* R_rog = new parallelogramm(point(0, 0), point(2, 4), point(10, 4), point(8, 0));
-		parallelogramm* L_rog = new parallelogramm(point(1, 3), point(4, 6), point(12, 6), point(10, 2));
+		parallelogramm* L_rog = new parallelogramm(point(2, 2), point(4, 6), point(12, 6), point(10, 2));
 		shape_refresh();
 		_getch();
 		hat->rotate_right();
