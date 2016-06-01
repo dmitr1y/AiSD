@@ -1,18 +1,25 @@
 #include "SETfunc.h"
 
 
-SET::SET()
+SET::SET(int size)
 {
-	makeRandSet(16);	
-	dataPointer.clear();
+	if (size>0)
+	{
+		makeRandSet(size);
+		dataPointer.clear();
+	}
+	if (!size)
+	{
+		dataPointer.clear();
+		data.clear();
+	}
 }
 
-SET::SET(int in)
+SET::~SET()
 {
 	dataPointer.clear();
 	data.clear();
 }
-
 
  void SET::EXCL(const SET &B)
 {
@@ -54,6 +61,9 @@ SET::SET(int in)
 
  void SET::makeRandSet(int size)
 {
+	dataPointer.clear();
+	data.clear();
+	if (size>0)
 	for (int i = 0; i < size; i++)
 		dataPointer.insert(dataPointer.end(),data.insert(rand() % 100));
 }

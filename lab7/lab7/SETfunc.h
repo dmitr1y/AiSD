@@ -11,8 +11,8 @@ typedef std::multiset<int>::const_iterator ITERATOR;
 class SET
 {
 public:
-	SET();
 	SET(int);
+	~SET();
 	void EXCL(const SET&);
 	void CONCAT(const SET&, const SET&);
 	void SUBST(const SET&, const SET&, int);
