@@ -44,18 +44,18 @@ SET::SET(int in)
 
  void SET::UNION(const SET &A, const SET &B)
 {
-	std::set_union<ITERATOR, ITERATOR, std::insert_iterator<std::set<int>>>(A.data.begin(), A.data.end(), B.data.begin(), B.data.end(), inserter(data, data.begin()));
+	std::set_union<ITERATOR, ITERATOR, std::insert_iterator<std::multiset<int>>>(A.data.begin(), A.data.end(), B.data.begin(), B.data.end(), inserter(data, data.begin()));
 }
 
  void SET::INTERSECTION(const SET &A, const SET &B)
 {
-	std::set_intersection<ITERATOR, ITERATOR, std::insert_iterator<std::set<int>>>(A.data.begin(), A.data.end(), B.data.begin(), B.data.end(), inserter(data, data.begin()));
+	std::set_intersection<ITERATOR, ITERATOR, std::insert_iterator<std::multiset<int>>>(A.data.begin(), A.data.end(), B.data.begin(), B.data.end(), inserter(data, data.begin()));
 }
 
  void SET::makeRandSet(int size)
 {
 	for (int i = 0; i < size; i++)
-		data.insert(rand() % 100);
+		dataPointer.insert(dataPointer.end(),data.insert(rand() % 100));
 }
 
 void SET::show()

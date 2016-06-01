@@ -6,7 +6,7 @@
 #include <vector>
 #include <iterator>
 
-typedef std::set<int>::const_iterator ITERATOR;
+typedef std::multiset<int>::const_iterator ITERATOR;
 
 class SET
 {
@@ -23,6 +23,6 @@ public:
 private:
 	int maxNumber;//макс элемент
 	int capacity;//мощность
-	std::set<int>data;
-	std::vector<std::set<int>::const_iterator> dataPointer;
+	std::multiset<int>data;
+	std::vector<ITERATOR> dataPointer;
 };
